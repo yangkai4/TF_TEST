@@ -1,82 +1,92 @@
-variable "region" {
-  description = "(Deprecated from version 1.3.0)The region used to launch this module resources."
-  type        = string
-  default     = ""
-}
-
 # RAM user
 variable "create_user" {
-  description = "Whether to create ram user."
+  description = "Whether to create the RAM user"
   type        = bool
   default     = true
 }
 
 variable "name" {
-  description = "Desired name for the ram user. If not set, a default name with prefix `ram-user-` will be returned."
+  description = "Name of the RAM user. If not set, a default name with prefix `ram-user-` will be returned."
   type        = string
   default     = ""
 }
 
-variable "force_destroy" {
-  description = "When destroying this user, destroy even if it has non-Terraform-managed ram access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed."
+variable "display_name" {
+  description = "Name of the RAM user which for display"
+  type        = string
+  default     = ""
+}
+
+variable "mobile" {
+  description = "Phone number of the RAM user"
+  type        = string
+  default     = ""
+}
+
+variable "email" {
+  description = "Email of the RAM user"
+  type        = string
+  default     = ""
+}
+
+variable "force" {
+  description = "This parameter is used for resource destroy"
   type        = bool
   default     = false
+}
+
+variable "comments" {
+  description = "Comment of the RAM user"
+  type        = string
+  default     = ""
 }
 
 # RAM login profile
 variable "create_ram_user_login_profile" {
-  description = "Whether to create ram user login profile"
+  description = "Whether to create RAM user login profile"
+  type        = bool
+  default     = true
+}
+
+variable "password" {
+  description = "Password of the RAM user"
+  type        = string
+  default     = ""
+}
+
+variable "password_reset_required" {
+  description = "This parameter indicates whether the password needs to be reset when the user first logs in"
   type        = bool
   default     = false
 }
 
-variable "password" {
-  description = "Login password of the user"
-  type        = string
-  default     = ""
+variable "mfa_bind_required" {
+  description = "This parameter indicates whether the MFA needs to be bind when the user first logs in"
+  type        = bool
+  default     = false
 }
 
 # RAM access key
 variable "create_ram_access_key" {
-  description = "Whether to create ram access key"
+  description = "Whether to create RAM access key"
   type        = bool
-  default     = false
+  default     = true
+}
+
+variable "pgp_key" {
+  description = "Either a base-64 encoded PGP public key, or a keybase username in the form"
+  type        = string
+  default     = ""
 }
 
 variable "secret_file" {
-  description = "A file used to store access key and secret key of ther user "
+  description = "The name of file that can save access key id and access key secret"
   type        = string
   default     = ""
 }
 
-# RAM user policy attachment
-variable "is_admin" {
-  description = "Whether to grant admin permission"
-  type        = bool
-  default     = false
-}
-
-variable "is_reader" {
-  description = "Whether to grant reader permission"
-  type        = bool
-  default     = false
-}
-
-variable "policy_type" {
-  description = "Type of the RAM policy. It must be Custom or System."
+variable "status" {
+  description = "Status of access key"
   type        = string
-  default     = "System"
-}
-
-# RAM ram lopicies
-variable "admin_name_regex" {
-  description = "A regex string to filter resulting policies by name."
-  type        = string
-  default     = ""
-}
-
-variable "reader_name_regex" {
-  description = "A regex string to filter resulting policies by name."
-  type        = string
-  default     = ""
+  default     = "Active"
 }
