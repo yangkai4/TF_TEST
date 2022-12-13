@@ -1,6 +1,3 @@
-provider "alicloud" {
-}
-
 resource "random_uuid" "this" {
 }
 
